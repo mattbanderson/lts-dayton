@@ -1,0 +1,11 @@
+{
+  "name": "lts-bike-map",
+  "version": "1.0.0",
+  "description": "An interactive map showing bicycle route level of traffic stress (LTS) info for the Dayton, OH area",
+  "main": "app.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matt Anderson",
+  "license": "MIT"
+}
