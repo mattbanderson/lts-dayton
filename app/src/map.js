@@ -1,7 +1,8 @@
 var map = L.map('mapid').setView([39.76, -84.18], 13);
 
 addOsmTileLayer();
-addGeoJsonToMap();
+addTopoJsonToMap('data/NetworkLTS4.topo.json', "#ff7800");
+addTopoJsonToMap('data/LowStressStreets.topo.json', "#2D27E3");
 
 function addMapboxTileLayer() {
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -18,19 +19,20 @@ function addOsmTileLayer() {
   }).addTo(map);
 }
 
-function addGeoJsonToMap() {
-  $.get('/data/NetworkLTS4.no-desc.json', function(data) {
-    var myStyle = {
-      "color": "#ff7800",
-      "weight": 5,
-      "opacity": 0.65
-    };
-    L.geoJson(data, { style: myStyle }).addTo(map);
+function addGeoJsonToMap(url, style) {
+  $.get(url, function(data) {
+    L.geoJson(data, { style: style }).addTo(map);
   });
 }
 
-function addTopoJsonToMap() {
-  $.get('/data/NetworkLTS4.topo.json', function(data) {
-    omnivore.topojson.parse(data).addTo(map);
+function addTopoJsonToMap(url, color) {
+  var layer = L.geoJson(null, {
+      style: function(feature) {
+          return {
+            color: color,
+            weight: 3
+          };
+      }
   });
+  omnivore.topojson(url, null, layer).addTo(map);
 }
