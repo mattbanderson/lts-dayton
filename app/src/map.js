@@ -1,8 +1,9 @@
 var map = L.map('mapid').setView([39.76, -84.18], 13);
 
 addOsmTileLayer();
-addTopoJsonToMap('data/NetworkLTS4.topo.json', "#ff7800");
-addTopoJsonToMap('data/LowStressStreets.topo.json', "#2D27E3");
+addTopoJsonToMap('data/NetworkLTS4.topo.json', "#FF0000 ");
+addTopoJsonToMap('data/NetworkLTS3.topo.json', "#FFFF00");
+addTopoJsonToMap('data/LowStressStreets.topo.json', "#008000");
 
 function addMapboxTileLayer() {
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
