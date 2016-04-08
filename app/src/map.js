@@ -5,7 +5,7 @@ addGeoJsonVtLayer();
 
 function addGeoJsonVtLayer() {
   addGeoJsonVtToMap('data/NetworkLTS4.no-desc.json', 'red');
-  addGeoJsonVtToMap('data/NetworkLTS3.no-desc.json', 'yellow');
+  addGeoJsonVtToMap('data/NetworkLTS3.no-desc.json', 'orange');
   addGeoJsonVtToMap('data/LowStressStreets.no-desc.json', 'blue');
 }
 
@@ -40,14 +40,16 @@ function addGeoJsonVtToMap(url, lineColor) {
 }
 
 function drawFeatures(ctx, features, lineColor) {
-  ctx.strokeStyle = lineColor
+  ctx.strokeStyle = lineColor;
+  ctx.lineWidth = 2;
+
   for (var i = 0; i < features.length; i++) {
     var feature = features[i],
         type = feature.type;
     ctx.fillStyle = feature.tags.color ? feature.tags.color : 'rgba(255,0,0,0.05)';
     ctx.beginPath();
     for (var j = 0; j < feature.geometry.length; j++) {
-        const pad = 5;
+        const pad = 0;
         var geom = feature.geometry[j];
         if (type === 1) {
             ctx.arc(geom[0] * ratio + pad, geom[1] * ratio + pad, 2, 0, 2 * Math.PI, false);
