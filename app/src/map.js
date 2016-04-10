@@ -3,10 +3,16 @@ var map = L.map('mapid').setView([39.76, -84.18], 13);
 addOsmTileLayer();
 addGeoJsonVtLayer();
 
+function addTopoJsonToGeoJsonVtLayer() {
+  addTopoJsonToGeoJsonToMap('data/NetworkLTS4.topo.json', 'red', 'NetworkLTS4');
+  addTopoJsonToGeoJsonToMap('data/NetworkLTS3.topo.json', 'orange', 'NetworkLTS3');
+  addTopoJsonToGeoJsonToMap('data/LowStressStreets.topo.json', 'blue', 'LowStressStreets');
+}
+
 function addGeoJsonVtLayer() {
-  addGeoJsonVtToMap('data/NetworkLTS4.no-desc.json', 'red');
-  addGeoJsonVtToMap('data/NetworkLTS3.no-desc.json', 'orange');
-  addGeoJsonVtToMap('data/LowStressStreets.no-desc.json', 'blue');
+  addGeoJsonVtToMap('data/NetworkLTS4.no-desc.less-prec.json', 'red');
+  addGeoJsonVtToMap('data/NetworkLTS3.no-desc.less-prec.json', 'orange');
+  addGeoJsonVtToMap('data/LowStressStreets.no-desc.less-prec.json', 'blue');
 }
 
 function addTopoJsonLayer() {
@@ -19,6 +25,26 @@ function addGeoJsonLayer() {
   addGeoJsonToMap('data/NetworkLTS4.no-desc.json', "#FF0000 ");
   addGeoJsonToMap('data/NetworkLTS3.no-desc.json', "#FFFF00");
   addGeoJsonToMap('data/LowStressStreets.no-desc.json', "#008000");
+}
+
+function addTopoJsonToGeoJsonToMap(url, lineColor, objectKey) {
+  $.get(url, function(data) {
+    var geoJsonFeatColl = topojson.feature(data, data.objects[objectKey])
+
+    var tileIndex = geojsonvt(geoJsonFeatColl, { maxZoom: 18 });
+
+    var canvasTiles = L.tileLayer.canvas();
+    canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
+      var tile = tileIndex.getTile(zoom, tilePoint.x, tilePoint.y);
+
+      if (!tile) {
+        return;
+      }
+
+      drawFeatures(canvas.getContext('2d'), tile.features, lineColor);
+    };
+    canvasTiles.addTo(map);
+  });
 }
 
 function addGeoJsonVtToMap(url, lineColor) {
