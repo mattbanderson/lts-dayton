@@ -1,7 +1,7 @@
 var map = L.map('mapid').setView([39.76, -84.18], 13);
 
 addOsmTileLayer();
-addGeoJsonVtLayer();
+addTopoJsonToGeoJsonVtLayer();
 
 function addTopoJsonToGeoJsonVtLayer() {
   addTopoJsonToGeoJsonToMap('data/NetworkLTS4.topo.json', 'red', 'NetworkLTS4');
