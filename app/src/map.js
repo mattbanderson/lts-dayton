@@ -6,7 +6,7 @@ addTopoJsonToGeoJsonVtLayer();
 function addTopoJsonToGeoJsonVtLayer() {
   addTopoJsonToGeoJsonToMap('data/NetworkLTS4.topo.json', 'red', 'NetworkLTS4');
   addTopoJsonToGeoJsonToMap('data/NetworkLTS3.topo.json', 'orange', 'NetworkLTS3');
-  addTopoJsonToGeoJsonToMap('data/LowStressStreets.topo.json', 'blue', 'LowStressStreets');
+  addTopoJsonToGeoJsonToMap('data/LowStressStreets.topo.json', 'green', 'LowStressStreets');
 }
 
 function addGeoJsonVtLayer() {
