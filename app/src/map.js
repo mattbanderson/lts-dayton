@@ -1,6 +1,7 @@
 var map = L.map('mapid').setView([39.76, -84.18], 13);
 
 addOsmTileLayer();
+addLegend();
 addTopoJsonToGeoJsonVtLayer();
 
 function addTopoJsonToGeoJsonVtLayer() {
@@ -109,6 +110,28 @@ function addOsmTileLayer() {
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
+}
+
+function addLegendLine(text, lineColor) {
+  return (
+    '<svg height="24" width="175">' +
+      '<line x1="0" y1="12" x2="50" y2="12" style="stroke:' + lineColor + ';stroke-width:2"/>' +
+      '<text x="60" y="18">' + text + '</text>' +
+    '</svg><br>');
+}
+
+function addLegend() {
+  var legend = L.control({position: 'bottomright'});
+
+  legend.onAdd = function (map) {
+      var div = L.DomUtil.create('div', 'info legend');
+      div.innerHTML =
+        addLegendLine('Low Stress', 'green') +
+        addLegendLine('Moderate Stress', 'orange') +
+        addLegendLine('High Stress', 'red');
+      return div;
+  };
+  legend.addTo(map);
 }
 
 function addGeoJsonToMap(url, color) {
