@@ -129,6 +129,8 @@ function addLegend() {
         addLegendLine('Moderate Stress', 42, 'orange', 36) +
         addLegendLine('High Stress', 66, 'red', 60) +
       '</svg>'
+      div.title = 'Click to remove legend';
+      div.onclick = function() { map.removeControl(legend)};
       return div;
   };
   legend.addTo(map);
