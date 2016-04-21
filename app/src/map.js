@@ -112,12 +112,10 @@ function addOsmTileLayer() {
   }).addTo(map);
 }
 
-function addLegendLine(text, lineColor) {
+function addLegendLine(text, textY, lineColor, lineY) {
   return (
-    '<svg height="24" width="175">' +
-      '<line x1="0" y1="12" x2="50" y2="12" style="stroke:' + lineColor + ';stroke-width:2"/>' +
-      '<text x="60" y="18">' + text + '</text>' +
-    '</svg><br>');
+    '<line x1="0" y1="' + lineY + '" x2="50" y2="' + lineY + '" style="stroke:' + lineColor + ';stroke-width:5"/>' +
+    '<text x="60" y="' + textY + '">' + text + '</text>');
 }
 
 function addLegend() {
@@ -126,9 +124,11 @@ function addLegend() {
   legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend');
       div.innerHTML =
-        addLegendLine('Low Stress', 'green') +
-        addLegendLine('Moderate Stress', 'orange') +
-        addLegendLine('High Stress', 'red');
+      '<svg height="72" width="175">' +
+        addLegendLine('Low Stress', 18, 'green', 12) +
+        addLegendLine('Moderate Stress', 42, 'orange', 36) +
+        addLegendLine('High Stress', 66, 'red', 60) +
+      '</svg>'
       return div;
   };
   legend.addTo(map);
