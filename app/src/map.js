@@ -5,9 +5,9 @@ addLegend();
 addTopoJsonToGeoJsonVtLayer();
 
 function addTopoJsonToGeoJsonVtLayer() {
-  addTopoJsonToGeoJsonToMap('data/NetworkLTS4.topo.json', 'red', 'NetworkLTS4');
-  addTopoJsonToGeoJsonToMap('data/NetworkLTS3.topo.json', 'orange', 'NetworkLTS3');
-  addTopoJsonToGeoJsonToMap('data/LowStressStreets.topo.json', 'green', 'LowStressStreets');
+  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS4.topo.json', 'red', 'NetworkLTS4');
+  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS3.topo.json', 'orange', 'NetworkLTS3');
+  addTopoJsonToGeoJsonVtToMap('data/LowStressStreets.topo.json', 'green', 'LowStressStreets');
 }
 
 function addGeoJsonVtLayer() {
@@ -28,7 +28,7 @@ function addGeoJsonLayer() {
   addGeoJsonToMap('data/LowStressStreets.no-desc.json', "#008000");
 }
 
-function addTopoJsonToGeoJsonToMap(url, lineColor, objectKey) {
+function addTopoJsonToGeoJsonVtToMap(url, lineColor, objectKey) {
   $.get(url, function(data) {
     var geoJsonFeatColl = topojson.feature(data, data.objects[objectKey])
 
