@@ -1,6 +1,6 @@
 var map = L.map('mapid').setView([39.76, -84.18], 13);
 
-addOsmTileLayer();
+addMapboxTileLayer();
 addLegend();
 addTopoJsonToGeoJsonVtLayer();
 
@@ -98,12 +98,10 @@ function drawFeatures(ctx, features, lineColor) {
 }
 
 function addMapboxTileLayer() {
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+  L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWJhbmRlcnNvbjMiLCJhIjoiY2lscmNwbm91MDhxN3VobTFneGhscXdrOSJ9.v6i-0EYa3CW7icfo0a_Chw', {
+      attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">MapBox</a> &copy; <a href="http://www.openstreetmap.org/about/">OpenStreetMap</a>',
       maxZoom: 18,
-      id: 'mapbox.mapbox-streets-v7',
-      accessToken: 'pk.eyJ1IjoibWJhbmRlcnNvbjMiLCJhIjoiY2lscmNwbm91MDhxN3VobTFneGhscXdrOSJ9.v6i-0EYa3CW7icfo0a_Chw'
-  }).addTo(mymap);
+  }).addTo(map);
 }
 
 function addOsmTileLayer() {
