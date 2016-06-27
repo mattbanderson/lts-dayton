@@ -1,13 +1,16 @@
-var map = L.map('mapid').setView([39.76, -84.18], 13);
+var map = L.map('mapid').setView([39.76, -84.18], 13),
+    levelOneColor = '#06AED5';
+    levelThreeColor = '#F0C808';
+    levelFourColor = '#DD5454';
 
 addMapboxTileLayer();
 addLegend();
 addTopoJsonToGeoJsonVtLayer();
 
 function addTopoJsonToGeoJsonVtLayer() {
-  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS4.topo.json', 'red', 'NetworkLTS4');
-  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS3.topo.json', 'orange', 'NetworkLTS3');
-  addTopoJsonToGeoJsonVtToMap('data/LowStressStreets.topo.json', 'green', 'LowStressStreets');
+  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS4.topo.json', levelFourColor, 'NetworkLTS4');
+  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS3.topo.json', levelThreeColor, 'NetworkLTS3');
+  addTopoJsonToGeoJsonVtToMap('data/LowStressStreets.topo.json', levelOneColor, 'LowStressStreets');
 }
 
 function addGeoJsonVtLayer() {
@@ -123,9 +126,9 @@ function addLegend() {
       var div = L.DomUtil.create('div', 'info legend');
       div.innerHTML =
       '<svg height="72" width="175">' +
-        addLegendLine('Low Stress', 18, 'green', 12) +
-        addLegendLine('Moderate Stress', 42, 'orange', 36) +
-        addLegendLine('High Stress', 66, 'red', 60) +
+        addLegendLine('Low Stress', 18, levelOneColor, 12) +
+        addLegendLine('Moderate Stress', 42, levelThreeColor, 36) +
+        addLegendLine('High Stress', 66, levelFourColor, 60) +
       '</svg>'
       div.title = 'Click to remove legend';
       div.onclick = function() { map.removeControl(legend)};
