@@ -1,5 +1,5 @@
 var map = L.map('mapid').setView([39.76, -84.18], 13),
-    levelOneColor = '#06AED5';
+    levelOneColor = '#1C7C54';
     levelThreeColor = '#F0C808';
     levelFourColor = '#DD5454';
 
@@ -71,7 +71,7 @@ function addGeoJsonVtToMap(url, lineColor) {
 
 function drawFeatures(ctx, features, lineColor) {
   ctx.strokeStyle = lineColor;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 1;
 
   for (var i = 0; i < features.length; i++) {
     var feature = features[i],
@@ -120,7 +120,7 @@ function addLegendLine(text, textY, lineColor, lineY) {
 }
 
 function addLegend() {
-  var legend = L.control({position: 'bottomright'});
+  var legend = L.control({position: 'topright'});
 
   legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend');
@@ -129,9 +129,8 @@ function addLegend() {
         addLegendLine('Low Stress', 18, levelOneColor, 12) +
         addLegendLine('Moderate Stress', 42, levelThreeColor, 36) +
         addLegendLine('High Stress', 66, levelFourColor, 60) +
-      '</svg>'
-      div.title = 'Click to remove legend';
-      div.onclick = function() { map.removeControl(legend)};
+      '</svg>' +
+      '<a href="http://transweb.sjsu.edu/project/1005.html" target="_blank">About</a>'
       return div;
   };
   legend.addTo(map);
