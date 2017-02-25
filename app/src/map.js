@@ -1,16 +1,20 @@
 var map = L.map('mapid').setView([39.76, -84.18], 13),
-    levelOneColor = '#1C7C54';
-    levelThreeColor = '#F0C808';
-    levelFourColor = '#DD5454';
+    levelOneColor = '#1C7C54',
+    levelOneKey = 'LowStressStreets',
+    levelThreeColor = '#F0C808',
+    levelThreeKey = 'NetworkLTS3',
+    levelFourColor = '#DD5454',
+    levelFourKey = 'NetworkLTS4',
+    layers = {};
 
 addMapboxTileLayer();
 addLegend();
 addTopoJsonToGeoJsonVtLayer();
 
 function addTopoJsonToGeoJsonVtLayer() {
-  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS4.topo.json', levelFourColor, 'NetworkLTS4');
-  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS3.topo.json', levelThreeColor, 'NetworkLTS3');
-  addTopoJsonToGeoJsonVtToMap('data/LowStressStreets.topo.json', levelOneColor, 'LowStressStreets');
+  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS4.topo.json', levelFourColor, levelFourKey);
+  addTopoJsonToGeoJsonVtToMap('data/NetworkLTS3.topo.json', levelThreeColor, levelThreeKey);
+  addTopoJsonToGeoJsonVtToMap('data/LowStressStreets.topo.json', levelOneColor, levelOneKey);
 }
 
 function addGeoJsonVtLayer() {
@@ -53,6 +57,7 @@ function addTopoJsonToGeoJsonVtToMap(url, lineColor, objectKey) {
           drawFeatures(canvas.getContext('2d'), tile.features, lineColor);
         };
         canvasTiles.addTo(map);
+        layers[objectKey] = canvasTiles;
       }
       else {
           alert('Request failed.  Returned status of ' + xhr.status);
@@ -123,9 +128,20 @@ function addOsmTileLayer() {
   }).addTo(map);
 }
 
-function addLegendLine(text, lineColor) {
+function toggleLayer(checkbox) {
+  console.log(checkbox.checked);
+  if (checkbox.checked) {
+    map.addLayer(layers[checkbox.id]);
+  } else {
+    map.removeLayer(layers[checkbox.id]);
+
+  }
+}
+
+function addLegendLine(text, lineColor, idKey) {
   return (
     '<tr>' +
+      '<td><input type="checkbox" id="' + idKey + '" onclick="toggleLayer(this)" checked /></td>' +
       '<td><hr style="display:inline-block; width: 50px;" color="' + lineColor + '" size="5" />' +
       '</td><td>' + text + '</td>' +
     '</tr>'
@@ -139,9 +155,9 @@ function addLegend() {
       var div = L.DomUtil.create('div', 'info legend');
       div.innerHTML =
       '<table>' +
-      addLegendLine("Low Stress", levelOneColor) +
-      addLegendLine("Moderate Stress", levelThreeColor) +
-      addLegendLine("High Stress", levelFourColor) +
+      addLegendLine("Low Stress", levelOneColor, levelOneKey) +
+      addLegendLine("Moderate Stress", levelThreeColor, levelThreeKey) +
+      addLegendLine("High Stress", levelFourColor, levelFourKey) +
       '</table>' +
       '<a href="http://transweb.sjsu.edu/project/1005.html" target="_blank">About</a>'
       return div;
