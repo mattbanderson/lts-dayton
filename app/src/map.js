@@ -142,8 +142,8 @@ function addLegendLine(text, lineColor, idKey) {
   return (
     '<tr>' +
       '<td><input type="checkbox" id="' + idKey + '" onclick="toggleLayer(this)" checked /></td>' +
-      '<td><hr style="display:inline-block; width: 50px;" color="' + lineColor + '" size="5" />' +
-      '</td><td>' + text + '</td>' +
+      '<td><hr style="display:inline-block; width: 50px;" color="' + lineColor + '" size="5" /></td>' +
+      '<td>' + text + '</td>' +
     '</tr>'
   );
 }
@@ -155,9 +155,9 @@ function addLegend() {
       var div = L.DomUtil.create('div', 'info legend');
       div.innerHTML =
       '<table>' +
-      addLegendLine("Low Stress", levelOneColor, levelOneKey) +
-      addLegendLine("Moderate Stress", levelThreeColor, levelThreeKey) +
-      addLegendLine("High Stress", levelFourColor, levelFourKey) +
+        addLegendLine("Low Stress", levelOneColor, levelOneKey) +
+        addLegendLine("Moderate Stress", levelThreeColor, levelThreeKey) +
+        addLegendLine("High Stress", levelFourColor, levelFourKey) +
       '</table>' +
       '<a href="http://transweb.sjsu.edu/project/1005.html" target="_blank">About</a>'
       return div;
