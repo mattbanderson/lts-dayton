@@ -32,23 +32,33 @@ function addGeoJsonLayer() {
 }
 
 function addTopoJsonToGeoJsonVtToMap(url, lineColor, objectKey) {
-  $.get(url, function(data) {
-    var geoJsonFeatColl = topojson.feature(data, data.objects[objectKey])
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+        var geoJsonFeatColl = topojson.feature(data, data.objects[objectKey])
 
-    var tileIndex = geojsonvt(geoJsonFeatColl, { maxZoom: 18 });
+        var tileIndex = geojsonvt(geoJsonFeatColl, { maxZoom: 18 });
 
-    var canvasTiles = L.tileLayer.canvas();
-    canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
-      var tile = tileIndex.getTile(zoom, tilePoint.x, tilePoint.y);
+        var canvasTiles = L.tileLayer.canvas();
+        canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
+          var tile = tileIndex.getTile(zoom, tilePoint.x, tilePoint.y);
 
-      if (!tile) {
-        return;
+          if (!tile) {
+            return;
+          }
+
+          drawFeatures(canvas.getContext('2d'), tile.features, lineColor);
+        };
+        canvasTiles.addTo(map);
       }
-
-      drawFeatures(canvas.getContext('2d'), tile.features, lineColor);
-    };
-    canvasTiles.addTo(map);
-  });
+      else {
+          alert('Request failed.  Returned status of ' + xhr.status);
+      }
+  };
+  xhr.send();
 }
 
 function addGeoJsonVtToMap(url, lineColor) {
