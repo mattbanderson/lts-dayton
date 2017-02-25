@@ -113,10 +113,13 @@ function addOsmTileLayer() {
   }).addTo(map);
 }
 
-function addLegendLine(text, textY, lineColor, lineY) {
+function addLegendLine(text, lineColor) {
   return (
-    '<line x1="0" y1="' + lineY + '" x2="50" y2="' + lineY + '" style="stroke:' + lineColor + ';stroke-width:5"/>' +
-    '<text x="60" y="' + textY + '">' + text + '</text>');
+    '<tr>' +
+      '<td><hr style="display:inline-block; width: 50px;" color="' + lineColor + '" size="5" />' +
+      '</td><td>' + text + '</td>' +
+    '</tr>'
+  );
 }
 
 function addLegend() {
@@ -125,11 +128,11 @@ function addLegend() {
   legend.onAdd = function (map) {
       var div = L.DomUtil.create('div', 'info legend');
       div.innerHTML =
-      '<svg height="72" width="175">' +
-        addLegendLine('Low Stress', 18, levelOneColor, 12) +
-        addLegendLine('Moderate Stress', 42, levelThreeColor, 36) +
-        addLegendLine('High Stress', 66, levelFourColor, 60) +
-      '</svg>' +
+      '<table>' +
+      addLegendLine("Low Stress", levelOneColor) +
+      addLegendLine("Moderate Stress", levelThreeColor) +
+      addLegendLine("High Stress", levelFourColor) +
+      '</table>' +
       '<a href="http://transweb.sjsu.edu/project/1005.html" target="_blank">About</a>'
       return div;
   };
