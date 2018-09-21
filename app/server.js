@@ -6,8 +6,6 @@ var bodyParser = require('body-parser');
 var app = express();
 
 var options = {};
-// Uncomment to change default start page
-var options = { index: "app.html" };
 
 app.use(compression());
 app.use('/', express.static(path.join(__dirname, ''), options));
