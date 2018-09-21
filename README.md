@@ -26,9 +26,9 @@ This project takes the data collected by the MVRPC and makes it available as an 
 
 LTS data is stored as [TopoJSON](https://github.com/mbostock/topojson), converted to [GeoJSON](http://geojson.org/) on the client using the TopoJSON API,  sliced into vector tiles using [geojson-vt](https://github.com/mapbox/geojson-vt), and rendered as a canvas element.
 
-It is currently hosted as a Node.js app on Azure using [Express](http://expressjs.com/).
+It was originally hosted as a Node.js app on Azure using [Express](http://expressjs.com/), but is now hosted on my personal site using GitHub pages.
 
-Check out [LTS Dayton](http://ltsdayton.azurewebsites.net/)!
+Check out [LTS Dayton](http://mattbanderson.com/lts-dayton/app/index.html)!
 
 ## License
 MIT
