@@ -10,7 +10,7 @@ The Level of Traffic Stress concept was first used by the Mineta Transportation 
 * LTS 4: most roads with 30 mph+ speeds and/or five or more lanes
 
 ## Local LTS Analysis
-The Miami Valley Regional Planning Commisssion ([MVRPC](mvrpc.org)) simplified and adapted the original LTS analysis to a regional scale as part of the [2015 Update](rpc.org/bike-plan-update) to the MVRPC Bikeways Plan.  Using a modified version of the MTI model, MVRPC staff mapped the entire region. One of the primary goals of the project was to identify low-stress islands and potential projects to connect them.
+The Miami Valley Regional Planning Commission ([MVRPC](mvrpc.org)) simplified and adapted the original LTS analysis to a regional scale as part of the [2015 Update](https://mvrpc.org/bike-plan-update) to the MVRPC Bikeways Plan.  Using a modified version of the MTI model, MVRPC staff mapped the entire region. One of the primary goals of the project was to identify low-stress islands and potential projects to connect them.
 
 The Miami Valley has the nation’s largest paved trail network, which provides a very low-stress
 riding environment where cyclists are completely separated from traffic except
